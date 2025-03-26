@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitCheck BMI Calculator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header class="bg-primary text-white text-center py-5">
+        <h1>FitCheck BMI Calculator</h1>
+        <p>Your health is your wealth. Calculate your BMI today!</p>
+    </header>
+
+    <div class="container mt-5">
+        <section id="about" class="mb-5">
+            <h2>About the Website</h2>
+            <p>This website helps you calculate your Body Mass Index (BMI) and provides a BMI chart for reference. Understanding your BMI can help you assess your body weight in relation to your height and determine if you are in a healthy weight range.</p>
+        </section>
+
+        <section id="bmi-chart" class="mb-5">
+            <h2>BMI Chart</h2>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>BMI Category</th>
+                        <th>BMI Range</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Underweight</td>
+                        <td>Less than 18.5</td>
+                    </tr>
+                    <tr>
+                        <td>Normal weight</td>
+                        <td>18.5 - 24.9</td>
+                    </tr>
+                    <tr>
+                        <td>Overweight</td>
+                        <td>25 - 29.9</td>
+                    </tr>
+                    <tr>
+                        <td>Obesity</td>
+                        <td>30 or greater</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="bmi-calculator">
+            <h2>BMI Calculator</h2>
+            <form id="bmiForm">
+                <div class="form-group">
+                    <label for="height">Height (in cm):</label>
+                    <input type="number" class="form-control" id="height" required>
+                </div>
+                <div class="form-group">
+                    <label for="weight">Weight (in kg):</label>
+                    <input type="number" class="form-control" id="weight" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Calculate BMI</button>
+            </form>
+            <div id="result" class="mt-3"></div>
+        </section>
+    </div>
+
+    <footer class="bg-light text-center py-3">
+        <p>&copy; 2025 FitCheck. All rights reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+    document.getElementById('bmiForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const height = parseFloat(document.getElementById('height').value) / 100; // Convert cm to meters
+    const weight = parseFloat(document.getElementById('weight').value);
+    const bmi = (weight / (height * height)).toFixed(2);
+
+    let category = '';
+    if (bmi < 18.5) {
+        category = 'Underweight';
+    } else if (bmi >= 18.5 && bmi < 24.9) {
+        category = 'Normal weight';
+    } else if (bmi >= 25 && bmi < 29.9) {
+        category = 'Overweight';
+    } else {
+        category = 'Obesity';
+    }
+
+    document.getElementById('result').innerHTML = `Your BMI is <strong>${bmi}</strong>, which is considered <strong>${category}</strong>.`;
+});
+    </script>
+</body>
+</html>
